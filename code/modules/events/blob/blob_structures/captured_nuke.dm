@@ -27,3 +27,11 @@
 
 /obj/structure/blob/captured_nuke/Life(seconds, times_fired)
 	obj_integrity = min(max_integrity, obj_integrity + 1)
+
+/obj/structure/blob/captured_nuke/run_action()
+	if(resource_delay > world.time)
+		return
+	flick("blob_resource_glow", src)
+	resource_delay = world.time + 40 // 4 seconds
+	if(overmind)
+		overmind.add_points(10)
